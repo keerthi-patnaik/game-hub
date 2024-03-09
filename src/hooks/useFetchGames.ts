@@ -7,9 +7,17 @@ type FetchResponse = {
   results: Game[];
 };
 
-type Game = {
+export type Game = {
   id: number;
   name: string;
+  background_image: string;
+  parent_platforms: { platform: Platform }[];
+};
+
+export type Platform = {
+  id: number;
+  name: string;
+  slug: string;
 };
 
 const useFetchGames = () => {
@@ -24,6 +32,7 @@ const useFetchGames = () => {
         signal: controller.signal,
       });
       setGameList(res.data.results);
+      setError('');
     } catch (err) {
       if (err instanceof CanceledError) {
         return;
