@@ -14,10 +14,21 @@ export type Game = {
   parent_platforms: { platform: Platform }[];
 };
 
+export type slugName =
+  | 'pc'
+  | 'playstation'
+  | 'xbox'
+  | 'mac'
+  | 'linux'
+  | 'android'
+  | 'ios'
+  | 'nintendo'
+  | 'web';
+
 export type Platform = {
-  id: number;
+  id?: number;
   name: string;
-  slug: string;
+  slug: slugName;
 };
 
 const useFetchGames = () => {

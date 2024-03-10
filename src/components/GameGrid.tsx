@@ -13,11 +13,16 @@ const GameGrid = () => {
     >
       {error && <Text>{error}</Text>}
       {gameList.map(game => {
+        const platforms = game.parent_platforms.map(platform => {
+          return platform.platform;
+        });
+
         return (
           <GameCard
             key={game.id}
             name={game.name}
             image={game.background_image}
+            platforms={platforms}
           />
         );
       })}
