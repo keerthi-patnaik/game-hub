@@ -1,19 +1,24 @@
-import { Card, CardBody, Heading, Image } from '@chakra-ui/react';
+import { Card, CardBody, HStack, Heading, Image } from '@chakra-ui/react';
 import { Platform } from '../hooks/useFetchGames';
+import CriticsScore from './CriticsScore';
 import PlatformList from './PlatformList';
 
 type GameCardProps = {
   name: string;
   image: string;
   platforms: Platform[];
+  metacritic: number;
 };
 
-const GameCard = ({ name, image, platforms }: GameCardProps) => {
+const GameCard = ({ metacritic, name, image, platforms }: GameCardProps) => {
   return (
     <Card>
       <Image src={image} />
       <CardBody>
-        <PlatformList platforms={platforms} />
+        <HStack justifyContent="space-between">
+          <PlatformList platforms={platforms} />
+          <CriticsScore score={metacritic} />
+        </HStack>
         <Heading size="md">{name}</Heading>
       </CardBody>
     </Card>

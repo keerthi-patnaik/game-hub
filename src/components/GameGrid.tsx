@@ -23,6 +23,7 @@ const GameGrid = () => {
             name={game.name}
             image={game.background_image}
             platforms={platforms}
+            metacritic={game.metacritic}
           />
         );
       })}
