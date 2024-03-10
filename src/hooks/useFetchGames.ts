@@ -2,7 +2,7 @@ import { AxiosError, CanceledError } from 'axios';
 import { useEffect, useState } from 'react';
 import apiClients from '../services/api-clients';
 
-type FetchResponse = {
+type FetchGameResponse = {
   count: number;
   results: Game[];
 };
@@ -13,6 +13,13 @@ export type Game = {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number;
+  genre: Genre[];
+};
+
+export type Genre = {
+  name: string;
+  slug: string;
+  games_count: number;
 };
 
 export type slugName =
@@ -40,7 +47,7 @@ const useFetchGames = () => {
   const fetchGame = async (controller: AbortController) => {
     setLoading(true);
     try {
-      const res = await apiClients.get<FetchResponse>('/games', {
+      const res = await apiClients.get<FetchGameResponse>('/games', {
         signal: controller.signal,
       });
       setGameList(res.data.results);

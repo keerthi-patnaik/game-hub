@@ -19,8 +19,8 @@ const GameGrid = () => {
         {isLoading
           ? skeletonArray.map(skeleton => {
               return (
-                <GameCardContainer>
-                  <GameCardSkeleton key={skeleton} />
+                <GameCardContainer key={skeleton}>
+                  <GameCardSkeleton />
                 </GameCardContainer>
               );
             })
@@ -30,9 +30,8 @@ const GameGrid = () => {
               });
 
               return (
-                <GameCardContainer>
+                <GameCardContainer key={game.id}>
                   <GameCard
-                    key={game.id}
                     name={game.name}
                     image={game.background_image}
                     platforms={platforms}
