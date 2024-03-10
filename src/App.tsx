@@ -9,17 +9,20 @@ function App() {
       templateAreas={{
         base: `'nav'
             'main'`,
-        lg: `'nav nav nav'
-          'side-nav main main'`,
+        lg: `'nav nav'
+          'side-nav main'`,
       }}
       gridTemplateRows={'70px 1fr'}
-      gridTemplateColumns={'250px 1fr 1fr'}
+      templateColumns={{
+        base: '1fr',
+        lg: '200px 1fr',
+      }}
     >
       <GridItem area="nav">
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area="side-nav">
+        <GridItem area="side-nav" paddingX={5}>
           <GenreList />
         </GridItem>
       </Show>
