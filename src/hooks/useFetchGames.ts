@@ -44,13 +44,14 @@ const useFetchGames = () => {
         signal: controller.signal,
       });
       setGameList(res.data.results);
+      setLoading(false);
       setError('');
     } catch (err) {
       if (err instanceof CanceledError) {
         return;
       }
-      setLoading(true);
       setError((err as AxiosError).message);
+      setLoading(false);
     }
   };
 

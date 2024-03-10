@@ -13,7 +13,7 @@ type GameCardProps = {
 
 const GameCard = ({ metacritic, name, image, platforms }: GameCardProps) => {
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card>
       <Image src={getCroppedImageUrl(image)} />
       <CardBody>
         <HStack justifyContent="space-between">
