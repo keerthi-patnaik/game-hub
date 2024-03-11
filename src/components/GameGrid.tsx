@@ -7,12 +7,18 @@ import GameCardSkeleton from './GameCardSkeleton';
 type GameGridProps = {
   selectedGenre?: Genre;
   selectedPlatform?: Platform;
+  selectedOrder?: string;
 };
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: GameGridProps) => {
+const GameGrid = ({
+  selectedGenre,
+  selectedPlatform,
+  selectedOrder,
+}: GameGridProps) => {
   const { isLoading, error, isError, gameList } = useFetchGames(
     selectedGenre?.id,
     selectedPlatform?.id,
+    selectedOrder,
   );
 
   const skeletonArray = Array.from(Array(15).keys());

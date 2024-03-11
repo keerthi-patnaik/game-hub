@@ -41,11 +41,16 @@ export type Platform = {
 const useFetchGames = (
   selectedGenreId: number | undefined,
   selectedPlatformId: number | undefined,
+  selectedOrder: string | undefined,
 ) => {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: [
       'games',
-      { genres: selectedGenreId, parent_platforms: selectedPlatformId },
+      {
+        genres: selectedGenreId,
+        parent_platforms: selectedPlatformId,
+        ordering: selectedOrder,
+      },
     ],
     queryFn: ({ signal }) => {
       return apiClients.get<FetchGameResponse>('/games', {
@@ -53,6 +58,7 @@ const useFetchGames = (
         params: {
           genres: selectedGenreId,
           parent_platforms: selectedPlatformId,
+          ordering: selectedOrder,
         },
       });
     },

@@ -1,19 +1,60 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { CgChevronDown } from 'react-icons/cg';
 
-const SortSelector = () => {
+type SortSelectorProps = {
+  onSelectOrderBy: (order: string) => void;
+  selectedOrder: string | '';
+};
+
+const sortByOrders = [
+  {
+    value: '',
+    label: 'Relevance',
+  },
+  {
+    value: '-added',
+    label: 'Date added',
+  },
+  {
+    value: '-released',
+    label: 'Release date',
+  },
+  {
+    value: '-metacritic',
+    label: 'Popularity',
+  },
+  {
+    value: '-rating',
+    label: 'Average rating',
+  },
+];
+
+const SortSelector = ({
+  selectedOrder,
+  onSelectOrderBy,
+}: SortSelectorProps) => {
+  const currentOrderBy = sortByOrders.find(o => {
+    return o.value == selectedOrder;
+  });
+
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<CgChevronDown />}>
-        Order By:
+        Order By : {currentOrderBy ? currentOrderBy.label : 'Relevance'}
       </MenuButton>
       <MenuList maxH="350px" overflowY="scroll">
-        <MenuItem>Relevance</MenuItem>
-        <MenuItem>Date added</MenuItem>
-        <MenuItem>Name</MenuItem>
-        <MenuItem>Release date</MenuItem>
-        <MenuItem>Popularity</MenuItem>
-        <MenuItem>Average rating</MenuItem>
+        {sortByOrders.map((order, index) => {
+          return (
+            <MenuItem
+              key={index}
+              onClick={() => {
+                onSelectOrderBy(order.value);
+              }}
+            >
+              {order.label}
+            </MenuItem>
+          );
+        })}
       </MenuList>
     </Menu>
   );
