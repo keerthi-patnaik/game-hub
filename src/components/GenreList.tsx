@@ -6,9 +6,10 @@ import GenreListSkeleton from './GenreListSkeleton';
 
 type GenreListProps = {
   onFilterGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 };
 
-const GenreList = ({ onFilterGenre }: GenreListProps) => {
+const GenreList = ({ selectedGenre, onFilterGenre }: GenreListProps) => {
   const { error, isLoading, genres } = useFetchGenres();
 
   const skeletonArray = Array.from(Array(15).keys());
@@ -37,6 +38,9 @@ const GenreList = ({ onFilterGenre }: GenreListProps) => {
                         onFilterGenre(genre);
                       }}
                       variant="links"
+                      fontWeight={
+                        genre.id == selectedGenre?.id ? 'bold' : 'normal'
+                      }
                     >
                       {genre.name}
                     </Button>

@@ -31,6 +31,7 @@ function App() {
             onFilterGenre={genre => {
               setSelectedGenre(genre);
             }}
+            selectedGenre={selectedGenre}
           />
         </GridItem>
       </Show>

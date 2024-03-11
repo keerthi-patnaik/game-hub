@@ -8,7 +8,7 @@ export type FetchGenreResponse = {
 };
 
 export type Genre = {
-  id?: number;
+  id: number;
   name: string;
   slug: string;
   games_count: number;
