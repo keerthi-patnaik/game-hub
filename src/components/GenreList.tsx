@@ -1,9 +1,14 @@
-import { HStack, Image, List, ListItem, Text } from '@chakra-ui/react';
+import { Button, HStack, Image, List, ListItem } from '@chakra-ui/react';
+import { Genre } from '../hooks/useFetchGames';
 import { useFetchGenres } from '../hooks/useFetchGenres';
 import getCroppedImageUrl from '../services/getCroppedImageUrl';
 import GenreListSkeleton from './GenreListSkeleton';
 
-const GenreList = () => {
+type GenreListProps = {
+  onFilterGenre: (genre: Genre) => void;
+};
+
+const GenreList = ({ onFilterGenre }: GenreListProps) => {
   const { error, isLoading, genres } = useFetchGenres();
 
   const skeletonArray = Array.from(Array(15).keys());
@@ -27,7 +32,14 @@ const GenreList = () => {
                       src={getCroppedImageUrl(genre.image_background)}
                     />
 
-                    <Text fontSize="lg">{genre.name}</Text>
+                    <Button
+                      onClick={() => {
+                        onFilterGenre(genre);
+                      }}
+                      variant="links"
+                    >
+                      {genre.name}
+                    </Button>
                   </HStack>
                 </ListItem>
               );

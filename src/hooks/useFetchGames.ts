@@ -13,13 +13,13 @@ export type Game = {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number;
-  genre: Genre[];
+  genres: Genre[];
 };
 
 export type Genre = {
+  id: number;
   name: string;
   slug: string;
-  games_count: number;
 };
 
 export type slugName =
@@ -39,7 +39,7 @@ export type Platform = {
   slug: slugName;
 };
 
-const useFetchGames = () => {
+const useFetchGames = (selectedGenre: Genre | null) => {
   const [gameList, setGameList] = useState<Game[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -49,6 +49,7 @@ const useFetchGames = () => {
     try {
       const res = await apiClients.get<FetchGameResponse>('/games', {
         signal: controller.signal,
+        params: { genres: selectedGenre?.id },
       });
       setGameList(res.data.results);
       setLoading(false);
@@ -69,7 +70,7 @@ const useFetchGames = () => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [selectedGenre]);
 
   return { gameList, error, isLoading };
 };
