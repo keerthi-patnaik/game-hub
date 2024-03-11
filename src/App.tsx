@@ -22,10 +22,10 @@ function App() {
         lg: `'nav nav'
           'side-nav main'`,
       }}
-      gridTemplateRows={'70px 1fr'}
+      templateRows={'70px 1fr'}
       templateColumns={{
         base: '1fr',
-        lg: '200px 1fr',
+        lg: '220px 1fr',
       }}
     >
       <GridItem area="nav">

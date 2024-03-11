@@ -34,6 +34,7 @@ const GenreList = ({ selectedGenre, onFilterGenre }: GenreListProps) => {
                     />
 
                     <Button
+                      size="sm"
                       onClick={() => {
                         onFilterGenre(genre);
                       }}
