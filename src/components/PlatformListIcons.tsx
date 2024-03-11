@@ -13,7 +13,7 @@ import { MdPhoneIphone } from 'react-icons/md';
 import { SiNintendo } from 'react-icons/si';
 import { Platform, slugName } from '../hooks/useFetchGames';
 
-type PlatformListProps = {
+type PlatformListIconsProps = {
   platforms: Platform[];
 };
 
@@ -29,7 +29,7 @@ const iconsImages: Record<slugName, IconType> = {
   web: BsGlobe,
 };
 
-const PlatformList = ({ platforms }: PlatformListProps) => {
+const PlatformListIcons = ({ platforms }: PlatformListIconsProps) => {
   return (
     <HStack marginY={1}>
       {platforms.map(platform => {
@@ -45,4 +45,4 @@ const PlatformList = ({ platforms }: PlatformListProps) => {
   );
 };
 
-export default PlatformList;
+export default PlatformListIcons;

@@ -2,7 +2,7 @@ import { Card, CardBody, HStack, Heading, Image } from '@chakra-ui/react';
 import { Platform } from '../hooks/useFetchGames';
 import getCroppedImageUrl from '../services/getCroppedImageUrl';
 import CriticsScore from './CriticsScore';
-import PlatformList from './PlatformList';
+import PlatformListIcons from './PlatformListIcons';
 
 type GameCardProps = {
   name: string;
@@ -17,7 +17,7 @@ const GameCard = ({ metacritic, name, image, platforms }: GameCardProps) => {
       <Image src={getCroppedImageUrl(image)} />
       <CardBody>
         <HStack justifyContent="space-between">
-          <PlatformList platforms={platforms} />
+          <PlatformListIcons platforms={platforms} />
           <CriticsScore score={metacritic} />
         </HStack>
         <Heading size="md">{name}</Heading>
