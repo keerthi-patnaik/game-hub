@@ -9,11 +9,11 @@ type GameGridProps = {
 };
 
 const GameGrid = ({ selectedGenre }: GameGridProps) => {
-  const { isLoading, error, gameList } = useFetchGames(selectedGenre);
+  const { isLoading, error, isError, gameList } = useFetchGames(selectedGenre);
 
   const skeletonArray = Array.from(Array(15).keys());
 
-  if (error) return <Text>{error}</Text>;
+  if (isError) return <Text>{error?.message}</Text>;
 
   return (
     <SimpleGrid

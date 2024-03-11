@@ -10,11 +10,11 @@ type GenreListProps = {
 };
 
 const GenreList = ({ selectedGenre, onFilterGenre }: GenreListProps) => {
-  const { error, isLoading, genres } = useFetchGenres();
+  const { isError, isLoading, genres } = useFetchGenres();
 
   const skeletonArray = Array.from(Array(15).keys());
 
-  if (error) return null;
+  if (isError) return null;
 
   return (
     <List>

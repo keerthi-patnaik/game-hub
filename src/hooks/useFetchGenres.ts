@@ -1,5 +1,4 @@
-import { AxiosError, CanceledError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import apiClients from '../services/api-clients';
 
 export type FetchGenreResponse = {
@@ -16,37 +15,16 @@ export type Genre = {
 };
 
 const useFetchGenres = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(false);
-
-  const fetchGenre = async (controller: AbortController) => {
-    setLoading(true);
-    try {
-      const res = await apiClients.get<FetchGenreResponse>('/genres', {
-        signal: controller.signal,
+  const { data, isError, error, isLoading } = useQuery({
+    queryKey: ['genre'],
+    queryFn: ({ signal }) => {
+      return apiClients.get<FetchGenreResponse>('/genres', {
+        signal: signal,
       });
-      setGenres(res.data.results);
-      setError('');
-      setLoading(false);
-    } catch (err) {
-      if (err instanceof CanceledError) {
-        return;
-      }
-      setError((err as AxiosError).message);
-      setLoading(false);
-    }
-  };
+    },
+  });
 
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchGenre(controller);
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
-  return { genres, error, isLoading };
+  return { genres: data?.data.results || [], error, isLoading, isError };
 };
 
 export { useFetchGenres };
