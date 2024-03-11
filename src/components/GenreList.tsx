@@ -6,7 +6,7 @@ import GenreListSkeleton from './GenreListSkeleton';
 
 type GenreListProps = {
   onFilterGenre: (genre: Genre) => void;
-  selectedGenre: Genre | null;
+  selectedGenre?: Genre;
 };
 
 const GenreList = ({ selectedGenre, onFilterGenre }: GenreListProps) => {

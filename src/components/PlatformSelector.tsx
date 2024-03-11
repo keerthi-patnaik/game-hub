@@ -6,10 +6,19 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
-import { IoIosArrowDown } from 'react-icons/io';
+import { CgChevronDown } from 'react-icons/cg';
+import { Platform } from '../hooks/useFetchGames';
 import { useFetchPlatforms } from '../hooks/useFetchPlatforms';
 
-const PlatformSelector = () => {
+type PlatformSelectorProps = {
+  onFilterPlatform: (platform: Platform) => void;
+  selectedPlatform?: string;
+};
+
+const PlatformSelector = ({
+  onFilterPlatform,
+  selectedPlatform,
+}: PlatformSelectorProps) => {
   const { platforms, isError } = useFetchPlatforms();
 
   if (isError) return null;
@@ -17,12 +26,21 @@ const PlatformSelector = () => {
   return (
     <Box padding="10px">
       <Menu>
-        <MenuButton as={Button} rightIcon={<IoIosArrowDown />}>
-          Platforms
+        <MenuButton as={Button} rightIcon={<CgChevronDown />}>
+          {selectedPlatform ? selectedPlatform : 'Platforms'}
         </MenuButton>
         <MenuList maxH="400px" overflowY="scroll">
           {platforms.map(platform => {
-            return <MenuItem key={platform.id}>{platform.name}</MenuItem>;
+            return (
+              <MenuItem
+                key={platform.id}
+                onClick={() => {
+                  onFilterPlatform(platform);
+                }}
+              >
+                {platform.name}
+              </MenuItem>
+            );
           })}
         </MenuList>
       </Menu>

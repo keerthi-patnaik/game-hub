@@ -33,18 +33,27 @@ export type slugName =
   | 'web';
 
 export type Platform = {
-  id?: number;
+  id: number;
   name: string;
   slug: slugName;
 };
 
-const useFetchGames = (selectedGenre: Genre | null) => {
+const useFetchGames = (
+  selectedGenreId: number | undefined,
+  selectedPlatformId: number | undefined,
+) => {
   const { data, error, isLoading, isError } = useQuery({
-    queryKey: ['games', { genres: selectedGenre?.id }],
+    queryKey: [
+      'games',
+      { genres: selectedGenreId, parent_platforms: selectedPlatformId },
+    ],
     queryFn: ({ signal }) => {
       return apiClients.get<FetchGameResponse>('/games', {
         signal: signal,
-        params: { genres: selectedGenre?.id },
+        params: {
+          genres: selectedGenreId,
+          parent_platforms: selectedPlatformId,
+        },
       });
     },
   });

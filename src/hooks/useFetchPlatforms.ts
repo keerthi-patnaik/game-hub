@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import apiClients from '../services/api-clients';
+import { slugName } from './useFetchGames';
 
 type FetchPlatformsResponse = {
   count: number;
@@ -9,7 +10,7 @@ type FetchPlatformsResponse = {
 type Platform = {
   id: number;
   name: string;
-  slug: string;
+  slug: slugName;
 };
 
 const useFetchPlatforms = () => {

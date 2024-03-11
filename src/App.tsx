@@ -4,10 +4,13 @@ import GameGrid from './components/GameGrid';
 import GenreList from './components/GenreList';
 import NavBar from './components/NavBar';
 import PlatformSelector from './components/PlatformSelector';
-import { Genre } from './hooks/useFetchGames';
+import { Genre, Platform } from './hooks/useFetchGames';
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<Genre | undefined>();
+  const [selectedPlatform, setSelectedPlatform] = useState<
+    Platform | undefined
+  >();
 
   return (
     <Grid
@@ -37,8 +40,16 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <PlatformSelector />
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          onFilterPlatform={platform => {
+            setSelectedPlatform(platform);
+          }}
+          selectedPlatform={selectedPlatform?.name}
+        />
+        <GameGrid
+          selectedPlatform={selectedPlatform}
+          selectedGenre={selectedGenre}
+        />
       </GridItem>
     </Grid>
   );
