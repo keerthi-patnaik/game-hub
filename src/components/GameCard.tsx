@@ -21,7 +21,7 @@ const GameCard = ({
   platforms,
 }: GameCardProps) => {
   return (
-    <Card>
+    <Card overflow="hidden">
       <Image src={getCroppedImageUrl(image)} />
       <CardBody>
         <HStack justifyContent="space-between" marginBottom={3}>

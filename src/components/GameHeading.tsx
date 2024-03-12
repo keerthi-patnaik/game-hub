@@ -7,7 +7,7 @@ type GameHeadingProps = {
 
 const GameHeading = ({ platformTitle, genreTitle }: GameHeadingProps) => {
   return (
-    <Heading as="h1" marginY={5} fontSize="5xl">
+    <Heading as="h1" marginY={5} fontSize="6xl">
       {platformTitle && <span>{platformTitle} </span>}
       {genreTitle && <span>{genreTitle} </span>}
       Games
