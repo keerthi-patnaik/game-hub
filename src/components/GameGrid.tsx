@@ -54,6 +54,7 @@ const GameGrid = ({
                   image={game.background_image}
                   platforms={platforms}
                   metacritic={game.metacritic}
+                  rating={game.rating_top}
                 />
               </GameCardContainer>
             );
