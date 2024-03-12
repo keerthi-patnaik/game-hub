@@ -1,6 +1,7 @@
-import { Grid, GridItem, HStack, Show } from '@chakra-ui/react';
+import { Box, Grid, GridItem, HStack, Show } from '@chakra-ui/react';
 import { useState } from 'react';
 import GameGrid from './components/GameGrid';
+import GameHeading from './components/GameHeading';
 import GenreList from './components/GenreList';
 import NavBar from './components/NavBar';
 import PlatformSelector from './components/PlatformSelector';
@@ -13,6 +14,7 @@ function App() {
     Platform | undefined
   >();
   const [selectedOrder, setSelectedOrder] = useState<string>('');
+  const [selectedValue, setSelectedValue] = useState('');
 
   return (
     <Grid
@@ -29,7 +31,11 @@ function App() {
       }}
     >
       <GridItem area="nav">
-        <NavBar />
+        <NavBar
+          onSearch={value => {
+            setSelectedValue(value);
+          }}
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="side-nav" paddingX={5}>
@@ -42,22 +48,29 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <HStack spacing={5} padding="10px" marginBottom={5}>
-          <PlatformSelector
-            onFilterPlatform={platform => {
-              setSelectedPlatform(platform);
-            }}
-            selectedPlatform={selectedPlatform?.name}
+        <Box padding="10px" marginBottom={5}>
+          <GameHeading
+            platformTitle={selectedPlatform?.name}
+            genreTitle={selectedGenre?.name}
           />
-          <SortSelector
-            selectedOrder={selectedOrder}
-            onSelectOrderBy={order => setSelectedOrder(order)}
-          />
-        </HStack>
+          <HStack spacing={5}>
+            <PlatformSelector
+              onFilterPlatform={platform => {
+                setSelectedPlatform(platform);
+              }}
+              selectedPlatform={selectedPlatform?.name}
+            />
+            <SortSelector
+              selectedOrder={selectedOrder}
+              onSelectOrderBy={order => setSelectedOrder(order)}
+            />
+          </HStack>
+        </Box>
         <GameGrid
           selectedPlatform={selectedPlatform}
           selectedGenre={selectedGenre}
           selectedOrder={selectedOrder}
+          selectedValue={selectedValue}
         />
       </GridItem>
     </Grid>

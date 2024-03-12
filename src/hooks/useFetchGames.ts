@@ -42,6 +42,7 @@ const useFetchGames = (
   selectedGenreId: number | undefined,
   selectedPlatformId: number | undefined,
   selectedOrder: string | undefined,
+  selectedValue: string | '',
 ) => {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: [
@@ -50,6 +51,7 @@ const useFetchGames = (
         genres: selectedGenreId,
         parent_platforms: selectedPlatformId,
         ordering: selectedOrder,
+        search: selectedValue,
       },
     ],
     queryFn: ({ signal }) => {
@@ -59,6 +61,7 @@ const useFetchGames = (
           genres: selectedGenreId,
           parent_platforms: selectedPlatformId,
           ordering: selectedOrder,
+          search: selectedValue,
         },
       });
     },

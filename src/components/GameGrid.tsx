@@ -8,17 +8,20 @@ type GameGridProps = {
   selectedGenre?: Genre;
   selectedPlatform?: Platform;
   selectedOrder?: string;
+  selectedValue: string | '';
 };
 
 const GameGrid = ({
   selectedGenre,
   selectedPlatform,
   selectedOrder,
+  selectedValue,
 }: GameGridProps) => {
   const { isLoading, error, isError, gameList } = useFetchGames(
     selectedGenre?.id,
     selectedPlatform?.id,
     selectedOrder,
+    selectedValue,
   );
 
   const skeletonArray = Array.from(Array(15).keys());
